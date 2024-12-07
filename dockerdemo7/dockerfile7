@@ -1,0 +1,21 @@
+# Copyright Elizandro Duran 12-06-2024
+
+# Extend the Ubuntu image
+FROM ubuntu
+
+# Update installed packages and install vim and nginx in the docker instance
+RUN apt-get update && apt-get install -y vim nginx
+
+# Copy app scirpt from docker context into docker instance
+COPY assignment7.sh /usr/local/bin/
+
+# Update assignment7.sh permissions 
+RUN chmod +x /usr/local/bin/assignment7.sh
+
+# Ensure "that port 80 on the container is the one that is 
+# listening" - Amazon
+EXPOSE 80
+
+# Invoke the app script
+CMD /usr/local/bin/assignment7.sh
+
